@@ -5,109 +5,251 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GreenWrite — Plantable Pens & Pencils</title>
   <meta name="description" content="GreenWrite — Plantable pens and pencils made from recycled paper. Write your future. Grow your planet." />
+  <meta name="theme-color" content="#2e7d32" />
+
   <style>
-    :root{--green:#2e7d32;--light:#e9f5ea;--accent:#4caf50;--text:#163b23;--muted:#556b5a;--card:#ffffff;--maxw:1000px;--radius:14px;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;}
-    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--light),#f8fff9);color:var(--text);-webkit-font-smoothing:antialiased}
-    .container{max-width:var(--maxw);margin:28px auto;padding:20px}
-    header{display:flex;align-items:center;gap:16px}
-    .logo{width:68px;height:68px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,0.06)}
-    .logo img{max-width:56px;max-height:56px}
-    h1{margin:0;font-size:1.6rem}
-    p.lead{margin:6px 0 18px;color:var(--muted)}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center;margin-top:18px}
-    .card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:0 6px 20px rgba(0,0,0,0.06)}
-    .btn{display:inline-block;background:var(--green);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-    .feature{padding:12px;border-radius:10px;background:linear-gradient(180deg,#f8fff9,#ffffff);border:1px solid rgba(46,125,50,0.06)}
-    .products{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-    .prod{padding:14px;border-radius:12px;text-align:center}
-    .prod img{border-radius:8px}
-    .how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
-    .how div{background:#fff;padding:12px;border-radius:10px;text-align:center}
-    .team{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-    .team .person{padding:12px;text-align:center}
-    .grid-2{display:grid;grid-template-columns:1fr 360px;gap:20px}
-    .order-form input,.order-form textarea, .order-form select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #d6e9da;background:#fff}
-    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:0.9rem}
-    @media (max-width:900px){.hero,.grid-2{grid-template-columns:1fr}.products,.features,.how,.team{grid-template-columns:repeat(2,1fr)}}
+  :root{
+    --green:#2e7d32; --accent:#58b35a; --bg:#f6fff7; --muted:#5b705d; --text:#13321f;
+    --card:#ffffffcc; --glass:rgba(255,255,255,0.46); --maxw:1150px; --radius:14px;
+    --shadow:0 14px 40px rgba(12,25,12,0.06); --mono: 600ms;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#eaf7ea,#f8fff9);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+  .container{max-width:var(--maxw);margin:28px auto;padding:22px}
+
+  /* Header */
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .brand img{width:64px;height:64px;border-radius:12px;padding:6px;background:#fff;box-shadow:0 8px 28px rgba(5,30,10,0.06)}
+  h1{margin:0;font-size:1.4rem}
+  .tag{color:var(--muted);font-size:0.95rem}
+
+  nav{display:flex;gap:10px;align-items:center}
+  nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:9px;font-weight:600;transition:all .18s}
+  nav a:hover{background:var(--green);color:#fff;transform:translateY(-3px);box-shadow:0 10px 26px rgba(46,125,50,0.12)}
+
+  /* Hero with parallax */
+  .hero-wrap{position:relative;overflow:hidden;border-radius:16px;margin-top:18px}
+  .hero-bg{
+    position:absolute;inset:0;background:linear-gradient(135deg, rgba(46,125,50,0.08), rgba(88,179,88,0.03));
+    transform:translateZ(0); transition:transform 0.12s linear; pointer-events:none;
+  }
+  .hero{position:relative;display:grid;grid-template-columns:1fr 380px;gap:20px;align-items:center;padding:28px}
+  .hero .card{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));padding:18px;border-radius:12px;box-shadow:var(--shadow)}
+  .headline{font-size:1.6rem;margin:0 0 8px}
+  .typed{color:var(--accent);font-weight:800}
+  .hero-lead{color:var(--muted);margin:6px 0 14px}
+
+  /* typed cursor */
+  .typed-cursor{display:inline-block;width:10px;background:var(--accent);height:16px;margin-left:6px;border-radius:2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* stats counters */
+  .stats{display:flex;gap:12px;margin-top:12px}
+  .stat{background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.6);text-align:center;min-width:120px;box-shadow:0 6px 18px rgba(8,18,8,0.04)}
+  .stat .num{font-size:1.4rem;font-weight:800;color:var(--green)}
+
+  /* slideshow hero right */
+  .slideshow{border-radius:12px;overflow:hidden;position:relative;box-shadow:0 8px 28px rgba(8,20,8,0.06)}
+  .slide{display:none}
+  .slide.active{display:block}
+  .slide img{width:100%;height:210px;object-fit:cover;display:block}
+  .slide-controls{position:absolute;left:8px;right:8px;top:8px;display:flex;justify-content:space-between;pointer-events:none}
+  .slide-controls button{pointer-events:auto;background:rgba(255,255,255,0.95);border:0;padding:6px 9px;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.08);cursor:pointer}
+
+  /* Products grid */
+  .section-title{margin-top:22px;font-size:1.25rem}
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+  .prod{position:relative;padding:12px;border-radius:12px;text-align:center;transition:transform .28s ease, box-shadow .28s; background:linear-gradient(180deg,#fff,#fbfffb)}
+  .prod::after{content:"";position:absolute;inset:0;border-radius:12px;padding:1px;pointer-events:none;box-shadow:inset 0 1px 0 rgba(255,255,255,0.5)}
+  .prod:hover{transform:translateY(-10px);box-shadow:0 26px 80px rgba(8,30,10,0.08)}
+  .prod img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+  .prod h3{margin:10px 0 6px}
+  .prod p{color:var(--muted);margin:4px 0 10px}
+  .actions{display:flex;gap:8px;justify-content:center}
+  .btn{display:inline-block;background:var(--green);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;cursor:pointer;transition:transform .18s,box-shadow .18s}
+  .btn.secondary{background:transparent;color:var(--green);border:2px solid rgba(46,125,50,0.12)}
+  .btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(46,125,50,0.16)}
+
+  /* small image view */
+  .view-btn{background:#fff;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:8px;color:var(--green);font-weight:700}
+  .view-btn:hover{background:var(--green);color:#fff}
+
+  /* how section */
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+  .how .card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;border-radius:12px}
+
+  /* operations & team */
+  .grid-2{display:grid;grid-template-columns:1fr 380px;gap:20px;margin-top:16px}
+  .team{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  .person{padding:12px;text-align:center;background:#fff;border-radius:10px;box-shadow:0 8px 24px rgba(8,24,12,0.04)}
+
+  /* order form */
+  .order-form input,.order-form textarea,.order-form select{width:100%;padding:10px;margin-top:8px;border-radius:8px;border:1px solid #dcefdc;background:#fff}
+  .order-row{display:flex;gap:10px}
+  .order-row > *{flex:1}
+  .small{font-size:0.9rem;color:var(--muted)}
+
+  /* order modal / summary */
+  .modal{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:9999}
+  .modal.show{display:flex}
+  .modal-card{width:94%;max-width:520px;background:#fff;border-radius:12px;padding:16px;box-shadow:0 18px 70px rgba(6,20,6,0.4);animation:pop .28s ease}
+  @keyframes pop{from{transform:scale(.98);opacity:0}to{transform:scale(1);opacity:1}}
+
+  .order-summary{display:flex;flex-direction:column;gap:8px}
+  .summary-row{display:flex;justify-content:space-between;color:var(--muted)}
+
+  /* success check */
+  .success-check{width:80px;height:80px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;margin:8px auto;border:4px solid rgba(255,255,255,0.18);box-shadow:0 10px 30px rgba(46,125,50,0.18)}
+
+  /* lightbox */
+  .lightbox{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:10000}
+  .lightbox.show{display:flex}
+  .lightbox img{max-width:92%;max-height:86%;border-radius:8px;box-shadow:0 18px 60px rgba(0,0,0,0.6)}
+
+  /* back to top */
+  .top-btn{position:fixed;right:18px;bottom:18px;background:var(--green);color:#fff;padding:10px;border-radius:10px;display:none;cursor:pointer;box-shadow:0 12px 36px rgba(8,30,8,0.2)}
+  .top-btn.show{display:block}
+
+  /* fade-in reveal */
+  .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .fade-in.show{opacity:1;transform:translateY(0)}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr}
+    .grid-2{grid-template-columns:1fr}
+    .products{grid-template-columns:repeat(2,1fr)}
+    .how{grid-template-columns:repeat(2,1fr)}
+    .team{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .products{grid-template-columns:1fr}
+  }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Header -->
     <header>
-      <div class="logo"><img src="logo.png" alt="GreenWrite Logo" /></div>
-      <div>
-        <h1>GreenWrite</h1>
-        <p class="lead">Plantable Pens & Pencils — Write your future. Grow your planet.</p>
+      <div class="brand">
+        <img src="logo.png" alt="GreenWrite logo">
+        <div>
+          <h1>GreenWrite</h1>
+          <div class="tag">Plantable Pens & Pencils — <span class="typed" id="typedText"></span><span class="typed-cursor"></span></div>
+        </div>
       </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </header>
 
-    <section class="hero">
-      <div class="card">
-        <h2>Eco stationery that grows</h2>
-        <p>GreenWrite creates plantable pens and pencils made from recycled newspaper. When the pen or pencil finishes, plant it — the seed capsule grows into a plant. Perfect for students, schools & eco-gifts.</p>
+    <!-- HERO -->
+    <div class="hero-wrap" id="heroWrap">
+      <div class="hero-bg" id="heroBg"></div>
+      <section class="hero">
+        <div class="card fade-in" id="heroCard">
+          <h2 class="headline">Eco stationery that grows</h2>
+          <p class="hero-lead">GreenWrite creates plantable pens & pencils made from recycled newspaper. Use it, then plant it — grow life from your writes.</p>
 
-        <div class="features">
-          <div class="feature"><strong>Biodegradable</strong><div>Made from recycled paper, decomposes naturally.</div></div>
-          <div class="feature"><strong>Educational</strong><div>Teaches students about recycling and planting.</div></div>
-          <div class="feature"><strong>Low Cost</strong><div>Affordable materials, high social value.</div></div>
+          <div class="stats" aria-hidden="false">
+            <div class="stat">
+              <div class="num" data-target="1200">0</div>
+              <div class="small">Plants planned</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-target="15000">0</div>
+              <div class="small">Sheets saved</div>
+            </div>
+            <div class="stat">
+              <div class="num" data-target="95">0</div>
+              <div class="small">Schools reached</div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <a class="btn" href="#order">Order Now</a>
+            <a class="btn secondary" href="#contact" style="margin-left:8px">Contact</a>
+          </div>
         </div>
 
-        <h3 style="margin-top:14px">How to order</h3>
-        <p>Message us on WhatsApp or fill the form. We accept bulk school orders & gift packs.</p>
-        <a class="btn" href="#order">Order Now</a>
-      </div>
+        <aside class="hero-box fade-in">
+          <div class="slideshow" id="heroSlideshow" aria-hidden="true">
+            <div class="slide active"><img src="pen.jpg" alt="GreenWrite Pen"></div>
+            <div class="slide"><img src="pencil.jpg" alt="GreenWrite Pencil"></div>
+            <div class="slide"><img src="pen.jpg" alt="GreenWrite Combo"></div>
+            <div class="slide-controls">
+              <button class="slide-prev" title="Previous">◀</button>
+              <button class="slide-next" title="Next">▶</button>
+            </div>
+          </div>
 
-      <aside>
-        <div class="card" style="text-align:center">
-          <img src="pen.jpg" alt="GreenWrite prototype" style="width:100%;border-radius:10px;object-fit:cover;height:180px"/>
-          <h3 style="margin-top:12px">Pen: ₹20 | Pencil: ₹15 | Combo: ₹30</h3>
-          <p style="color:var(--muted)">Free local pickup for bulk orders • International shipping available</p>
-          <a class="btn" href="#contact" style="margin-top:8px;display:inline-block">Contact Us</a>
-        </div>
-      </aside>
-    </section>
+          <div class="card glass" style="width:100%;text-align:center">
+            <h3 style="margin:8px 0">Pen: ₹20 | Pencil: ₹15 | Combo: ₹30</h3>
+            <p style="color:var(--muted)">Free local pickup (bulk) • International shipping available</p>
+            <a class="btn" href="#order" style="margin-top:8px;display:inline-block">Place Order</a>
+          </div>
+        </aside>
+      </section>
+    </div>
 
+    <!-- PRODUCTS -->
     <section>
-      <h2 style="margin-top:22px">Products</h2>
+      <h2 class="section-title">Products</h2>
       <div class="products">
-        <div class="prod card">
-          <img src="pen.jpg" alt="Plantable Pen" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+        <!-- 1 -->
+        <div class="prod fade-in">
+          <img src="pen.jpg" alt="Plantable Pen">
           <h3>Plantable Pen</h3>
-          <p>Cost to make: ₹5 • Selling: ₹20</p>
+          <p>Cost to make: ₹5 • Price: ₹20</p>
+          <div class="actions">
+            <button class="view-btn" data-img="pen.jpg" aria-label="View pen image">VIEW IMAGE</button>
+            <button class="btn" data-name="Plantable Pen" data-price="20">BUY NOW</button>
+          </div>
         </div>
-        <div class="prod card">
-          <img src="pencil.jpg" alt="Plantable Pencil" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+
+        <!-- 2 -->
+        <div class="prod fade-in">
+          <img src="pencil.jpg" alt="Plantable Pencil">
           <h3>Plantable Pencil</h3>
-          <p>Cost to make: ₹4 • Selling: ₹15</p>
+          <p>Cost to make: ₹4 • Price: ₹15</p>
+          <div class="actions">
+            <button class="view-btn" data-img="pencil.jpg" aria-label="View pencil image">VIEW IMAGE</button>
+            <button class="btn" data-name="Plantable Pencil" data-price="15">BUY NOW</button>
+          </div>
         </div>
-        <div class="prod card">
-          <img src="pen.jpg" alt="Combo Pack" style="width:100%;height:140px;object-fit:cover;border-radius:8px"/>
+
+        <!-- 3 -->
+        <div class="prod fade-in">
+          <img src="pen.jpg" alt="Combo Pack">
           <h3>Combo Pack</h3>
           <p>Pen + Pencil • Price: ₹30</p>
+          <div class="actions">
+            <button class="view-btn" data-img="pen.jpg" aria-label="View combo image">VIEW IMAGE</button>
+            <button class="btn" data-name="Combo Pack" data-price="30">BUY NOW</button>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- HOW IT WORKS -->
     <section>
       <h2 style="margin-top:22px">How it works — Planting steps</h2>
       <div class="how">
-        <div class="card"><strong>Step 1</strong><div>Finish writing</div></div>
-        <div class="card"><strong>Step 2</strong><div>Put seed-end into soil</div></div>
-        <div class="card"><strong>Step 3</strong><div>Water regularly</div></div>
-        <div class="card"><strong>Step 4</strong><div>Watch plant grow</div></div>
+        <div class="card fade-in"><strong>Step 1</strong><div>Finish writing</div></div>
+        <div class="card fade-in"><strong>Step 2</strong><div>Put seed-end into soil</div></div>
+        <div class="card fade-in"><strong>Step 3</strong><div>Water regularly</div></div>
+        <div class="card fade-in"><strong>Step 4</strong><div>Watch plant grow</div></div>
       </div>
     </section>
 
-    <section>
-      <h2 style="margin-top:22px">Pricing & Shipping</h2>
-      <div class="card">
-        <p><strong>India</strong> — Pen ₹20, Pencil ₹15, Combo ₹30. Local shipping ₹40–₹60 (customer pays) • Bulk local orders: free delivery for 50+ packs.</p>
-        <p><strong>International</strong> — Pen $2.5, Pencil $2, Combo $5. Shipping depends on country. Example shipping cost to USA: ₹600–₹900 (paid by customer).</p>
-        <p style="color:var(--muted);font-size:0.95rem">We list shipping separately so customers see product price + shipping.</p>
-      </div>
-    </section>
-
+    <!-- WHY & OPERATIONS -->
     <section class="grid-2">
       <div>
         <h2 style="margin-top:22px">Why GreenWrite?</h2>
@@ -118,7 +260,7 @@
           <li>Affordable, educational, and scalable</li>
         </ul>
 
-        <h2 style="margin-top:10px">Operations Plan (short)</h2>
+        <h2 style="margin-top:12px">Operations Plan (short)</h2>
         <ol>
           <li>Collect newspaper & recycled paper</li>
           <li>Assemble pen/pencil with refill/lead, glue, seed capsule, clay seal</li>
@@ -139,32 +281,77 @@
       </aside>
     </section>
 
+    <!-- ORDER FORM -->
     <section id="order" style="margin-top:20px">
       <h2>Order / Contact</h2>
       <div class="card order-form">
-        <form id="orderForm">
-          <label>Name</label>
-          <input type="text" name="name" id="name" required placeholder="Your full name" />
-          <label>WhatsApp / Phone</label>
-          <input type="text" name="phone" id="phone" required placeholder="584161689126" />
-          <label>Email (optional)</label>
-          <input type="email" name="email" id="email" placeholder="you@example.com" />
-          <label>Product</label>
-          <select id="product" name="product">
-            <option value="pen">Plantable Pen - ₹20</option>
-            <option value="pencil">Plantable Pencil - ₹15</option>
-            <option value="combo">Combo Pack - ₹30</option>
-            <option value="bulk">Bulk Order (message qty)</option>
-          </select>
-          <label>Message (address / qty / shipping country)</label>
-          <textarea id="message" name="message" rows="3" placeholder="Your address or questions..."></textarea>
+        <form id="orderForm" novalidate>
+          <div class="order-row">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" required placeholder="Your full name" />
+            </div>
+            <div>
+              <label for="phone">WhatsApp / Phone</label>
+              <input id="phone" name="phone" required placeholder="+58 416-1689126" />
+            </div>
+          </div>
 
-          <button type="submit" class="btn" style="margin-top:10px">Send Order</button>
+          <div style="margin-top:10px" class="order-row">
+            <div>
+              <label for="productSelect">Product</label>
+              <select id="productSelect" name="product">
+                <option value="Plantable Pen" data-price="20">Plantable Pen — ₹20</option>
+                <option value="Plantable Pencil" data-price="15">Plantable Pencil — ₹15</option>
+                <option value="Combo Pack" data-price="30">Combo Pack — ₹30</option>
+              </select>
+            </div>
+            <div>
+              <label for="qty">Quantity</label>
+              <input id="qty" name="qty" type="number" min="1" value="1" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px" class="order-row">
+            <div>
+              <label for="country">Shipping Country</label>
+              <select id="country">
+                <option value="IN" data-ship="50">India (₹50)</option>
+                <option value="US" data-ship="700">USA (₹700)</option>
+                <option value="UK" data-ship="600">UK (₹600)</option>
+                <option value="AU" data-ship="900">Australia (₹900)</option>
+                <option value="OTHER" data-ship="1000">Other (₹1000)</option>
+              </select>
+            </div>
+            <div>
+              <label for="email">Email (optional)</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+
+          <label for="note" style="margin-top:10px">Address / Note</label>
+          <textarea id="note" name="note" rows="3" placeholder="Shipping address or extra info..."></textarea>
+
+          <!-- price summary -->
+          <div style="margin-top:12px;padding:10px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.6)">
+            <div style="display:flex;justify-content:space-between"><div class="small">Items total</div><div id="itemsTotal">₹0</div></div>
+            <div style="display:flex;justify-content:space-between"><div class="small">Shipping</div><div id="shipCost">₹0</div></div>
+            <hr/>
+            <div style="display:flex;justify-content:space-between;font-weight:800"><div>Total</div><div id="grandTotal">₹0</div></div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+            <button class="btn" type="button" id="previewBtn">Preview Order</button>
+            <button class="btn secondary" type="button" id="saveLocal">Save Draft</button>
+            <div style="flex:1"></div>
+            <button class="btn" type="submit">Send via WhatsApp</button>
+          </div>
+          <p class="small" style="margin-top:8px">You can preview the order summary and choose UPI or PayPal after confirming. (Payments are handled manually.)</p>
         </form>
-        <p style="color:var(--muted);margin-top:10px">After you submit, your order will be sent to our WhatsApp number and we will reply with payment & shipping details.</p>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact" style="margin-top:18px">
       <h2>Contact & Social</h2>
       <div class="card" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
@@ -173,31 +360,338 @@
           <strong>Email:</strong> <a href="mailto:greenwriteofficial@gmail.com">greenwriteofficial@gmail.com</a><br/>
           <strong>Instagram:</strong> <a href="https://instagram.com/_green_.write" target="_blank">@_green_.write</a>
         </div>
-        <div style="flex:1"></div>
-        <div style="min-width:220px">
-        </div>
       </div>
     </section>
 
-    <footer>
-      <p>Made by Team GreenWrite — Class 11. <br/> Write your future. Grow your planet.</p>
+    <footer style="margin-top:18px">
+      <p style="color:var(--muted)">Made by Team GreenWrite — Class 11. Write your future. Grow your planet.</p>
     </footer>
   </div>
 
-  <script>
-    const form = document.getElementById('orderForm');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = encodeURIComponent(document.getElementById('name').value || '');
-      const phone = encodeURIComponent(document.getElementById('phone').value || '');
-      const email = encodeURIComponent(document.getElementById('email').value || '');
-      const product = encodeURIComponent(document.getElementById('product').value || '');
-      const message = encodeURIComponent(document.getElementById('message').value || '');
-      const waNumber = '584161689126';
-      const text = `Order from website%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0AProduct: ${product}%0AMessage: ${message}`;
-      const url = `https://wa.me/${waNumber}?text=${text}`;
-      window.open(url, '_blank');
-    });
-  </script>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true"><img id="lbimg" src="" alt="Large view"></div>
+
+  <!-- ORDER SUMMARY MODAL -->
+  <div id="orderModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Order Summary</h3>
+        <button id="closeModal" style="background:#fff;border-radius:8px;padding:6px;border:0;cursor:pointer">✕</button>
+      </div>
+      <div id="orderDetails" class="order-summary" style="margin-top:12px">
+        <!-- dynamic -->
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button id="confirmOrder" class="btn">Confirm & Pay</button>
+        <button id="editOrder" class="btn secondary">Edit</button>
+      </div>
+
+      <div id="paymentArea" style="margin-top:12px;display:none">
+        <div style="text-align:center">
+          <div style="font-weight:700;margin-bottom:8px">Pay with UPI</div>
+          <!-- Replace src with your upi image file if you have one (upi-qr.png) -->
+          <img id="upiQR" src="upi-qr.png" alt="UPI QR" style="width:180px;height:180px;object-fit:contain;border-radius:8px;background:#fff;border:6px solid #fff" onerror="this.style.display='none'">
+          <div class="small" style="margin-top:8px">Or send UPI to: <strong>greenwrite@upi</strong></div>
+
+          <div style="margin-top:12px">
+            <a id="paypalBtn" class="btn" href="#" target="_blank">Pay with PayPal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- success modal -->
+  <div id="successModal" class="modal" aria-hidden="true">
+    <div class="modal-card" style="text-align:center">
+      <div class="success-check">✓</div>
+      <h3>Order Sent!</h3>
+      <p style="color:var(--muted)">We opened WhatsApp with the order details. We'll contact you shortly. Order saved locally.</p>
+      <div style="margin-top:8px"><button id="closeSuccess" class="btn">Close</button></div>
+    </div>
+  </div>
+
+  <!-- back to top -->
+  <button id="topBtn" class="top-btn" aria-label="Back to top">↑</button>
+
+<script>
+/* ---------- Typed headline ---------- */
+const typedWords = ["Write your future.", "Grow your planet."];
+let tIdx = 0, cIdx = 0;
+function typeLoop(){
+  const el = document.getElementById('typedText');
+  if(!el) return;
+  const word = typedWords[tIdx];
+  el.textContent = word.slice(0, cIdx);
+  cIdx++;
+  if(cIdx > word.length+8){
+    cIdx = 0; tIdx = (tIdx+1)%typedWords.length;
+    setTimeout(typeLoop, 700);
+  } else setTimeout(typeLoop, 60);
+}
+document.addEventListener('DOMContentLoaded', typeLoop);
+
+/* ---------- Parallax hero background follows mouse ---------- */
+const heroBg = document.getElementById('heroBg');
+const heroWrap = document.getElementById('heroWrap');
+if(heroWrap && heroBg){
+  heroWrap.addEventListener('mousemove', (e)=>{
+    const rect = heroWrap.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    heroBg.style.transform = `translate(${x*18}px, ${y*12}px) rotate(${x*2}deg)`;
+  });
+}
+
+/* ---------- Counters animation ---------- */
+function animateCounters(){
+  document.querySelectorAll('.num').forEach(el=>{
+    const target = +el.getAttribute('data-target') || 0;
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 80));
+    const interval = setInterval(()=>{
+      current += step;
+      if(current >= target){ el.textContent = target; clearInterval(interval); }
+      else el.textContent = current;
+    }, 18);
+  });
+}
+(new IntersectionObserver((entries, obs)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      animateCounters();
+      obs.disconnect();
+    }
+  });
+}, {threshold:0.2})).observe(document.querySelector('.stats') || document.body);
+
+/* ---------- Reveal fade-in ---------- */
+const revealItems = document.querySelectorAll('.fade-in');
+const revealObs = new IntersectionObserver((entries, obs)=>{
+  entries.forEach(ent => {
+    if(ent.isIntersecting){
+      ent.target.classList.add('show');
+      obs.unobserve(ent.target);
+    }
+  });
+}, {threshold: 0.12});
+revealItems.forEach(i=>revealObs.observe(i));
+
+/* ---------- HERO slideshow ---------- */
+(function(){
+  const container = document.getElementById('heroSlideshow');
+  if(!container) return;
+  const slides = Array.from(container.querySelectorAll('.slide'));
+  const prev = container.querySelector('.slide-prev');
+  const next = container.querySelector('.slide-next');
+  let idx = 0;
+  function show(i){
+    slides.forEach(s=>s.classList.remove('active'));
+    slides[i].classList.add('active');
+  }
+  show(idx);
+  let timer = setInterval(()=>{ idx = (idx+1)%slides.length; show(idx); }, 3600);
+  container.addEventListener('mouseenter', ()=> clearInterval(timer));
+  container.addEventListener('mouseleave', ()=> timer = setInterval(()=>{ idx=(idx+1)%slides.length; show(idx); }, 3600));
+  prev && prev.addEventListener('click', ()=>{ idx=(idx-1+slides.length)%slides.length; show(idx); });
+  next && next.addEventListener('click', ()=>{ idx=(idx+1)%slides.length; show(idx); });
+})();
+
+/* ---------- Lightbox for VIEW IMAGE ---------- */
+const lb = document.getElementById('lightbox');
+const lbimg = document.getElementById('lbimg');
+document.querySelectorAll('.view-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=> {
+    const src = btn.dataset.img;
+    lbimg.src = src;
+    lb.classList.add('show');
+    lb.setAttribute('aria-hidden', 'false');
+  });
+});
+lb.addEventListener('click', e => { if(e.target === lb) { lb.classList.remove('show'); lb.setAttribute('aria-hidden','true'); } });
+document.addEventListener('keydown', e => { if(e.key==='Escape') lb.classList.remove('show'); });
+
+/* ---------- Back to top button ---------- */
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', ()=> {
+  if(window.scrollY > 500) topBtn.classList.add('show'); else topBtn.classList.remove('show');
+});
+topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ---------- ORDER / CONTACT logic (improved) ---------- */
+const productSelect = document.getElementById('productSelect');
+const qtyInput = document.getElementById('qty');
+const countrySelect = document.getElementById('country');
+const itemsTotal = document.getElementById('itemsTotal');
+const shipCost = document.getElementById('shipCost');
+const grandTotal = document.getElementById('grandTotal');
+const previewBtn = document.getElementById('previewBtn');
+const orderForm = document.getElementById('orderForm');
+const orderModal = document.getElementById('orderModal');
+const orderDetails = document.getElementById('orderDetails');
+const closeModal = document.getElementById('closeModal');
+const confirmOrder = document.getElementById('confirmOrder');
+const editOrder = document.getElementById('editOrder');
+const paymentArea = document.getElementById('paymentArea');
+const successModal = document.getElementById('successModal');
+const closeSuccess = document.getElementById('closeSuccess');
+
+// shipping calculation & totals
+function calcTotals(){
+  const price = +productSelect.options[productSelect.selectedIndex].dataset.price || 0;
+  const qty = Math.max(1, Math.floor(+qtyInput.value || 1));
+  const itemTotal = price * qty;
+  const ship = +countrySelect.options[countrySelect.selectedIndex].dataset.ship || 0;
+  itemsTotal.textContent = `₹${itemTotal}`;
+  shipCost.textContent = `₹${ship}`;
+  grandTotal.textContent = `₹${itemTotal + ship}`;
+  return {itemTotal, ship, grand: itemTotal + ship, price, qty};
+}
+productSelect.addEventListener('change', calcTotals);
+qtyInput.addEventListener('input', calcTotals);
+countrySelect.addEventListener('change', calcTotals);
+document.addEventListener('DOMContentLoaded', calcTotals);
+
+// Save draft to localStorage
+document.getElementById('saveLocal').addEventListener('click', ()=>{
+  const data = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    product: productSelect.value,
+    price: productSelect.options[productSelect.selectedIndex].dataset.price,
+    qty: qtyInput.value,
+    country: countrySelect.value,
+    email: document.getElementById('email').value,
+    note: document.getElementById('note').value,
+    totals: calcTotals()
+  };
+  localStorage.setItem('greenwrite_draft', JSON.stringify(data));
+  alert('Draft saved locally. You can load it later from this browser.');
+});
+
+// Preview order -> show modal
+previewBtn.addEventListener('click', ()=>{
+  const totals = calcTotals();
+  const summaryHtml = `
+    <div><strong>Name:</strong> ${escapeHtml(document.getElementById('name').value || '-')}</div>
+    <div><strong>Phone:</strong> ${escapeHtml(document.getElementById('phone').value || '-')}</div>
+    <div><strong>Product:</strong> ${escapeHtml(productSelect.value)} x ${totals.qty} @ ₹${totals.price}</div>
+    <div class="summary-row"><span>Items</span><span>₹${totals.itemTotal}</span></div>
+    <div class="summary-row"><span>Shipping</span><span>₹${totals.ship}</span></div>
+    <div class="summary-row" style="font-weight:800"><span>Total</span><span>₹${totals.grand}</span></div>
+    <div style="margin-top:8px;color:var(--muted)"><strong>Note:</strong> ${escapeHtml(document.getElementById('note').value || '')}</div>`;
+  orderDetails.innerHTML = summaryHtml;
+  orderModal.classList.add('show');
+  orderModal.setAttribute('aria-hidden','false');
+  paymentArea.style.display = 'none';
+});
+
+// Edit order (close modal)
+editOrder.addEventListener('click', ()=> { orderModal.classList.remove('show'); orderModal.setAttribute('aria-hidden','true'); });
+
+// Confirm order -> show payment options
+confirmOrder.addEventListener('click', ()=>{
+  paymentArea.style.display = 'block';
+});
+
+// close modal
+closeModal.addEventListener('click', ()=> { orderModal.classList.remove('show'); orderModal.setAttribute('aria-hidden','true'); });
+
+// Confirm & Pay (actually opens WhatsApp with order after payment step optional)
+document.getElementById('confirmOrder').addEventListener('click', ()=>{ paymentArea.style.display = 'block'; });
+
+// Submit form: open WhatsApp with order text, save to localStorage orders list and show success modal
+orderForm.addEventListener('submit', function(e){
+  e.preventDefault();
+  // simple validation
+  if(!document.getElementById('name').value.trim() || !document.getElementById('phone').value.trim()){
+    alert('Please enter your name and phone.');
+    return;
+  }
+  const totals = calcTotals();
+  const order = {
+    name: document.getElementById('name').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    product: productSelect.value,
+    priceEach: totals.price,
+    qty: totals.qty,
+    shippingCountry: countrySelect.value,
+    shippingCost: totals.ship,
+    total: totals.grand,
+    note: document.getElementById('note').value.trim(),
+    timestamp: new Date().toISOString()
+  };
+
+  // save to localStorage orders array
+  const all = JSON.parse(localStorage.getItem('greenwrite_orders') || '[]');
+  all.unshift(order);
+  localStorage.setItem('greenwrite_orders', JSON.stringify(all));
+
+  // open WhatsApp
+  const waNumber = '584161689126';
+  const text = encodeURIComponent(
+    `GreenWrite Order:%0AName: ${order.name}%0APhone: ${order.phone}%0AEmail: ${order.email}%0AProduct: ${order.product} x${order.qty}%0AShipping: ${order.shippingCountry} (₹${order.shippingCost})%0ATotal: ₹${order.total}%0ANote: ${order.note}`
+  );
+  const url = `https://wa.me/${waNumber}?text=${text}`;
+  window.open(url, '_blank');
+
+  // show success modal
+  successModal.classList.add('show'); successModal.setAttribute('aria-hidden','false');
+});
+
+// close success
+document.getElementById('closeSuccess').addEventListener('click', ()=>{
+  successModal.classList.remove('show'); successModal.setAttribute('aria-hidden','true');
+});
+
+// Helper: escape HTML to avoid injection in preview
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, (m)=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[m])); }
+
+/* ---------- Buy now buttons: pre-fill form ---------- */
+document.querySelectorAll('.prod .btn').forEach(b=>{
+  b.addEventListener('click', (e)=>{
+    const name = b.dataset.name || b.textContent || '';
+    const price = b.dataset.price || '0';
+    document.getElementById('productSelect').value = name;
+    // ensure qty reset
+    document.getElementById('qty').value = 1;
+    calcTotals();
+    // scroll to order
+    document.querySelector('#order').scrollIntoView({behavior:'smooth'});
+    // small pulse
+    b.animate([{transform:'scale(1.02)'},{transform:'scale(1)'}],{duration:280});
+  });
+});
+
+/* ---------- Save draft load (if present) ---------- */
+(function loadDraft(){
+  const draft = localStorage.getItem('greenwrite_draft');
+  if(draft){
+    try{
+      const d = JSON.parse(draft);
+      if(confirm('Load saved draft?')) {
+        document.getElementById('name').value = d.name || '';
+        document.getElementById('phone').value = d.phone || '';
+        document.getElementById('qty').value = d.qty || 1;
+        // select product that matches
+        [...productSelect.options].forEach(opt=>{ if(opt.value===d.product) opt.selected=true; });
+        document.getElementById('note').value = d.note || '';
+        document.getElementById('email').value = d.email || '';
+        calcTotals();
+      }
+    }catch(err){}
+  }
+})();
+
+/* ---------- Accessibility: close modals with ESC ---------- */
+document.addEventListener('keydown', (e)=> {
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal.show').forEach(m=>{ m.classList.remove('show'); m.setAttribute('aria-hidden','true');});
+    lb.classList.remove('show');
+  }
+});
+</script>
 </body>
 </html>
